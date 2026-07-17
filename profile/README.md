@@ -46,6 +46,7 @@ NextStage-SY is a software agency founded by **Abdullah Khatib** and **Mohammad 
 
 - ✉️ **Email** — [abdullah.m.khatib@gmail.com](mailto:abdullah.m.khatib@gmail.com)
 - 📞 **Phone** — [+963 947 561 808](tel:+963947561808)
+- 💼 **LinkedIn** — [Abdullah Khatib](https://www.linkedin.com/in/abdullah-khatib-m/)
 - 🌐 **Organization** — [github.com/NextStage-SY](https://github.com/NextStage-SY)
 - 📖 **Open source** — [Athar-Web](https://github.com/NextStage-SY/Athar-Web)
 
