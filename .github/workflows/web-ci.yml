@@ -1,0 +1,79 @@
+name: Web CI
+
+# Reusable CI for the NextStageSY ABP layered web apps (Labbeik, Wicket,
+# Malaebna, Athar, Melamade). Callers reference it with:
+#
+#   jobs:
+#     ci:
+#       uses: NextStageSY/.github/.github/workflows/web-ci.yml@main
+#
+# It builds and tests the .NET solution, then builds the three deployable
+# images (api, db-migrator, angular) via docker compose. Build only — it does
+# not push images anywhere yet.
+
+on:
+  workflow_call:
+    inputs:
+      dotnet-version:
+        description: '.NET SDK version to install'
+        type: string
+        required: false
+        default: '10.0.x'
+      compose-file:
+        description: 'Path to the CI docker compose file, relative to the repo root'
+        type: string
+        required: false
+        default: 'etc/docker-compose/docker-compose.ci.yml'
+
+jobs:
+  build-test:
+    name: Build, test & docker compose build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Every app is a single-project ABP solution whose *.slnx basename is the
+      # project prefix used for csproj/namespace names (e.g. "Labbeik").
+      # Deriving it here keeps the caller workflow identical across all repos.
+      - name: Resolve project name
+        id: proj
+        run: |
+          slnx=$(ls *.slnx 2>/dev/null | head -n1)
+          if [ -z "$slnx" ]; then
+            echo "::error::No .slnx solution file found at the repo root."
+            exit 1
+          fi
+          name="${slnx%.slnx}"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "Resolved project name: $name"
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ inputs.dotnet-version }}
+
+      - name: Restore
+        run: dotnet restore "${{ steps.proj.outputs.name }}.slnx"
+
+      - name: Build
+        run: dotnet build "${{ steps.proj.outputs.name }}.slnx" -c Release --no-restore --nologo
+
+      - name: Test
+        run: dotnet test "${{ steps.proj.outputs.name }}.slnx" -c Release --no-build --nologo
+
+      # ABP convention: publish the .NET apps first, then let the (plain)
+      # Dockerfiles COPY the published output. See docker-compose.ci.yml.
+      - name: Publish HttpApi.Host
+        run: dotnet publish "src/${{ steps.proj.outputs.name }}.HttpApi.Host/${{ steps.proj.outputs.name }}.HttpApi.Host.csproj" -c Release --no-build --nologo
+
+      - name: Publish DbMigrator
+        run: dotnet publish "src/${{ steps.proj.outputs.name }}.DbMigrator/${{ steps.proj.outputs.name }}.DbMigrator.csproj" -c Release --no-build --nologo
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # The angular image builds itself (yarn build:prod inside the image), so
+      # this step also validates the Angular production build.
+      - name: Build images (docker compose)
+        run: docker compose -f "${{ inputs.compose-file }}" build
