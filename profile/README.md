@@ -42,10 +42,12 @@ NextStage-SY is a software agency founded by **Abdullah Khatib** and **Mohammad 
 - **Data** — PostgreSQL
 - **Delivery** — Docker + GitHub Actions CI
 
-## Explore
+## Get in touch
 
-- 🌐 Organization — [github.com/NextStage-SY](https://github.com/NextStage-SY)
-- 📖 Open source — [Athar-Web](https://github.com/NextStage-SY/Athar-Web)
+- ✉️ **Email** — [abdullah.m.khatib@gmail.com](mailto:abdullah.m.khatib@gmail.com)
+- 📞 **Phone** — [+963 947 561 808](tel:+963947561808)
+- 🌐 **Organization** — [github.com/NextStage-SY](https://github.com/NextStage-SY)
+- 📖 **Open source** — [Athar-Web](https://github.com/NextStage-SY/Athar-Web)
 
 ---
 
