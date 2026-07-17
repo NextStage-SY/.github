@@ -48,6 +48,21 @@ jobs:
           echo "name=$name" >> "$GITHUB_OUTPUT"
           echo "Resolved project name: $name"
 
+      # ABP references appsettings.secrets.json as a copy-to-output content file,
+      # but it is gitignored (secrets belong to the environment, not the repo).
+      # A clean checkout therefore lacks it and MSBuild fails with MSB3030.
+      # Seed empty placeholders so the build succeeds; real secrets are injected
+      # at deploy time, never here.
+      - name: Seed empty appsettings.secrets.json
+        run: |
+          grep -rl --include='*.csproj' 'appsettings.secrets.json' . | while read -r csproj; do
+            f="$(dirname "$csproj")/appsettings.secrets.json"
+            if [ ! -f "$f" ]; then
+              echo '{}' > "$f"
+              echo "created $f"
+            fi
+          done
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
