@@ -31,9 +31,14 @@ NextStage-SY is a software agency founded by **Abdullah Khatib** and **Mohammad 
 
 ## Our products
 
-**[Athar](https://github.com/NextStage-SY/Athar-Web)** (أثر) — a community-sustained Islamic knowledge platform, powered by donations and volunteers rather than subscriptions. Open and public — explore the code in **[Athar-Web](https://github.com/NextStage-SY/Athar-Web)**.
-
-*More products are in the works.*
+| Product | What it is |
+| --- | --- |
+| **[Athar](https://github.com/NextStage-SY/Athar-Web)** (أثر) | A community-sustained Islamic knowledge platform, powered by donations and volunteers rather than subscriptions. **Open source.** |
+| **Labbeik** (لبّيك) | A privacy-first, operator-deployed demand-fulfillment platform for MENA and diaspora communities. |
+| **Wicket** | Event reservation and QR-based check-in — secure invitations and fast door entry. |
+| **Malaebna** | In development. |
+| **Melamade** | In development. |
+| **NextStage** | In development. |
 
 ## How we build
 
