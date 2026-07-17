@@ -1,0 +1,34 @@
+name: ❓ Question / support
+description: Ask a question about using or developing the project
+title: "[Question]: "
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What would you like to know?
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - "API / Backend (.NET)"
+        - "Angular UI"
+        - "Database / Migrations"
+        - "Authentication / Identity"
+        - "Docs"
+        - "CI / CD"
+        - "Mobile"
+        - "Other / Not sure"
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: What have you tried?
+      description: Context, links, or steps you've already taken.
+    validations:
+      required: false

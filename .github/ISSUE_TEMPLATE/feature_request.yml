@@ -1,0 +1,47 @@
+name: ✨ Feature request
+description: Suggest an idea or enhancement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+      description: What problem does this solve? Why is it needed?
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - "API / Backend (.NET)"
+        - "Angular UI"
+        - "Database / Migrations"
+        - "Authentication / Identity"
+        - "Docs"
+        - "CI / CD"
+        - "Mobile"
+        - "Other / Not sure"
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe what you'd like to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Mockups, links, or anything else that helps.
+    validations:
+      required: false

@@ -1,0 +1,7 @@
+# Org-wide default issue chooser config (NextStageSY).
+# Applies to every repo that doesn't define its own .github/ISSUE_TEMPLATE.
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 Product documentation
+    url: https://github.com/NextStageSY
+    about: Check the product's -Docs repository before opening an issue.
